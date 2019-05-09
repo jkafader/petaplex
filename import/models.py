@@ -1,0 +1,30 @@
+from django.db import models
+from jsonfield import JSONField
+
+# Create your models here.
+class Film(models.Model):
+    year = models.IntegerField()
+    title = models.CharField(max_length=600)
+    plot = models.TextField()
+    rating = models.FloatField()
+    is_porn = models.BooleanField()
+    collect = models.BooleanField()
+    admin_notes = models.TextField()
+    collection = models.CharField(max_length=200)
+    ia_item_id = models.TextField()
+    imdb_id = models.CharField(max_length=200)
+
+class VideoItem(models.Model):
+    film = models.ForeignKey('Film', null=True, blank=True)
+    resolution = models.IntegerField()
+    size = models.BigIntegerField()
+    ia_metadata = JSONField()
+    def save(self):
+        # create or find associated film
+        # set foreign key
+        # set resolution
+        # set size
+
+for line in manifest:
+    item = json.loads(line)
+    VideoItem(ia_metadata=item)
