@@ -12,19 +12,23 @@ class Film(models.Model):
     admin_notes = models.TextField()
     collection = models.CharField(max_length=200)
     ia_item_id = models.TextField()
-    imdb_id = models.CharField(max_length=200)
+    imdb_id = models.CharField(max_length=200, unique=True)
 
 class VideoItem(models.Model):
     film = models.ForeignKey('Film', null=True, blank=True)
     resolution = models.IntegerField()
     size = models.BigIntegerField()
     ia_metadata = JSONField()
-    def save(self):
+    def save(self, *args, **kwargs):
         # create or find associated film
         # set foreign key
+        self.film = Film.objects.get_or_create(
+            year=self.ia_metadata.get('omdb', {}).get('Year'),
+            title=self.ia_metadata.get('omdb', {}).get('Title'),
+            imdb_id=self.ia_metadata.get('metadata', {}).get('external-identifier'),
+            )
         # set resolution
+        self.resolution=self.ia_metadata.get('')
         # set size
-
-for line in manifest:
-    item = json.loads(line)
-    VideoItem(ia_metadata=item)
+        self.size=self.ia_metadata.get('')
+        super().save(*args, **kwargs)

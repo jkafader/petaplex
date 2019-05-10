@@ -25,8 +25,7 @@ SECRET_KEY = 'i(@+6%%%nqu*-bu%rtfw#2176y!n^cvi!beb9wp)etjo*-&-3t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['jkafader1.fnf.archive.org',]
 
 # Application definition
 
@@ -49,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'petaplex.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -67,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'petaplex.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
